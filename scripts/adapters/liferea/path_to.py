@@ -44,6 +44,7 @@ def get_plugins_path(app_name: str) -> Path:
 
 
 # TODO request Liferea cmdline flag to print paths
+#      or via `gsettings list-recursively org.gnome.feed.Reader`
 # FIXME tests (including mypy, pycodestyle)
 # FIXME error handling
 def main(args: Optional[List[str]] = None) -> NoReturn:
@@ -60,6 +61,7 @@ def main(args: Optional[List[str]] = None) -> NoReturn:
     path = parsed_args.func(app_name='liferea')
 
     if path.is_dir():
+        # FIXME check if forcing a trailing separator is cross-platform
         path = str(path) + os.sep
 
     print(path)
