@@ -15,5 +15,5 @@ https://en.wikipedia.org/wiki/Palm_IIIxe
 2. [Install Palm Desktop 6.2.2](https://palmdb.net/app/palm-desktop) (or from Internet Archive: [www.palm.com](https://web.archive.org/web/20081217015844/http://www.palm.com/us/support/downloads/windesk62_after.html) or [Palm Desktop Repository
 ](https://archive.org/download/palm_desktop_repository/Windows/Palm_Desktop_6.2.2/)): `PalmDesktopWin62.exe`
 
-> [!NOTE]
+> [!Important]
 > [`Note Pad` (available starting in Palm OS 4)](https://palmdb.net/app/og-note-pad) support was dropped [_after_ Palm Desktop 4.1.0](https://web.archive.org/web/20081218230338/http://www.palm.com/us/support/downloads/add_downloads.html).
