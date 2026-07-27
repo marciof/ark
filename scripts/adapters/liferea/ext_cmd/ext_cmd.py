@@ -17,9 +17,9 @@ as its only argument.
 Motivation
 ^^^^^^^^^^
 
-Being able to use external downloaders with potentially wider support for
-various websites (eg. `yt-dlp <https://github.com/yt-dlp/yt-dlp>`_), as well as
-more powerful/flexible download management tools and GUIs.
+Using external downloaders with potentially wider support for various websites
+(eg. `yt-dlp <https://github.com/yt-dlp/yt-dlp>`_), as well as more
+powerful/flexible download management tools and GUIs.
 
 Rationale
 ^^^^^^^^^

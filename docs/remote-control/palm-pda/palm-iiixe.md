@@ -2,6 +2,23 @@
 
 https://en.wikipedia.org/wiki/Palm_IIIxe
 
+## Motivation
+
+Backup infrared-based remote controls, without needing the original nor spares.
+
+## Rationale
+
+- Built-in infrared transceiver.
+- Cheap to replace/buy.
+- No dependency on third-party companies.
+- No dependency on internet/cloud-based services.
+- Data portability/ownership.
+- Uses cheap, common, regular, AAA batteries for power.
+- Can use rechargeable batteries.
+- Long battery life.
+- Touch-screen, not limited to fixed buttons/layout.
+- Runs an OS, so it's possible to use custom solutions as needed.
+
 ## Setup
 
 ### Hardware
