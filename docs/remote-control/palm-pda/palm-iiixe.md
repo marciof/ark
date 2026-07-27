@@ -10,14 +10,18 @@ Backup infrared-based remote controls, without needing the original nor spares.
 
 - Cheap to replace/buy.
 - Built-in infrared transceiver.
-- No dependency on third-party companies.
-- No dependency on internet/cloud-based services.
+- No dependency on third-party companies. [^logitech-stop-harmony]
+- No dependency on internet/cloud-based services. [^logitech-discontinue-harmony]
 - Data portability/ownership.
 - Uses cheap, common, regular, AAA batteries for power.
 - Can use rechargeable batteries.
 - Long battery life.
 - Touch-screen, not limited to fixed buttons/layout.
 - Runs an OS, can install apps.
+
+[^logitech-stop-harmony]: > _"[...] [Logitech will no longer manufacture Harmony remotes](https://support.myharmony.com/en-us/harmony-remote-manufacturing-update)."_ ([Internet Archive](https://web.archive.org/web/20260706064659/https://support.myharmony.com/en-us/harmony-remote-manufacturing-update))
+
+[^logitech-discontinue-harmony]: > _"[...] [Logitech Harmony Remote Software no longer supports account creation or access to existing accounts for reprogramming, modifying, or making configuration changes to remotes](https://harmonyremote.com)."_ ([Internet Archive](https://web.archive.org/web/20251211222158/https://harmonyremote.com/))
 
 ## Setup
 
