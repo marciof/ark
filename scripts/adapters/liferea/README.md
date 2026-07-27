@@ -16,7 +16,9 @@ Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cm
 2. Log out and log in to apply changes.
 
 > [!Important]
-> If `DBusActivatable=true` is set in Liferea's `*.desktop` file, then [environment variables defined there won't be passed along](https://developer.gnome.org/documentation/guidelines/maintainer/integrating.html#d-bus-activation).
+> If `DBusActivatable=true` is set in Liferea's `*.desktop` file, then [environment variables defined there won't be passed along](https://developer.gnome.org/documentation/guidelines/maintainer/integrating.html#d-bus-activation). [^dbus-env-var]
+
+[^dbus-env-var]: > _"If DBusActivatable is true and the desktop file name looks like a valid application ID, then the Exec line will be ignored and your application will be started by way of D-Bus activation instead (using the name of the desktop file minus the .desktop extension as the application ID)."_
 
 # Development
 
