@@ -1,6 +1,6 @@
 # Prior Work
 
-_(Last checked: see versions below.)_
+_(Last checked: see individual versions below.)_
 
 ## Candidates
 

@@ -9,7 +9,7 @@ _(Last checked: v3.0.23)_
 1. Open `Preferences`.
 2. Switch to `Show settings` and `All`.
 3. Open `Input / Codecs`.
-4. Set `Change title according to current media` to: [^1]
+4. Set `Change title according to current media` to: [^format-string]
    ```
    $Z ($D)
    ```
@@ -18,9 +18,9 @@ _(Last checked: v3.0.23)_
 
 1. Open `Preferences`.
 2. Switch to the `Video` tab.
-3. Under `Video snapshots`, set `Prefix` to: [^1]
+3. Under `Video snapshots`, set `Prefix` to: [^format-string]
    ```
    $Z-
    ```
 
-[^1]: [Format string documentation.](https://wiki.videolan.org/Documentation:Format_String/)
+[^format-string]: [Format string documentation.](https://wiki.videolan.org/Documentation:Format_String/)
