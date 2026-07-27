@@ -41,14 +41,14 @@ https://github.com/gpodder/gpodder _Git/e05f630f_
 
 - [Doesn't run on phones/Android.](https://gpodder.github.io/#downloads)
 - [Last release is from 2024.](https://github.com/gpodder/gpodder/releases)
-    - Requires [running from Git sources](https://gpodder.github.io/docs/run-from-git.html) to get [QoL updates](https://github.com/gpodder/gpodder/commit/459f252a430d2c47714c2e87c8197f2964fb3083).
+  - Requires [running from Git sources](https://gpodder.github.io/docs/run-from-git.html) to get [QoL updates](https://github.com/gpodder/gpodder/commit/459f252a430d2c47714c2e87c8197f2964fb3083).
 - [Requires manual management of the yt-dlp dependency.](https://gpodder.github.io/docs/extensions/youtubedl.html)
 - Requires a manual [custom command](https://gpodder.github.io/docs/extensions/commandondownload.html) to avoid sub-folders per podcast.
-    - [It's device syncing specific.](https://gpodder.github.io/docs/user-manual.html#devices-preferences)
-    - Eg. `mv -- "$filename" ~/Downloads/`
+  - [It's device syncing specific.](https://gpodder.github.io/docs/user-manual.html#devices-preferences)
+  - Eg. `mv -- "$filename" ~/Downloads/`
 - Requires creating an extension for unsupported websites.
-    - [External service to fix feeds.](https://gpodder.github.io/docs/user-manual.html#using-pipesdigital-to-fix-feeds)
-    - [Built-in extensions.](https://gpodder.github.io/docs/extensions.html#default-extensions-included-with-gpodder)
+  - [External service to fix feeds.](https://gpodder.github.io/docs/user-manual.html#using-pipesdigital-to-fix-feeds)
+  - [Built-in extensions.](https://gpodder.github.io/docs/extensions.html#default-extensions-included-with-gpodder)
 
 ## Alternatives
 
