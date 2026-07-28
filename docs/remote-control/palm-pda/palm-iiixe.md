@@ -47,7 +47,7 @@ Backup infrared-based remote controls, without needing the original nor spares.
 > [!Note]
 > [`Note Pad` (available starting in Palm OS 4)](https://palmdb.net/app/og-note-pad) support was dropped [_after_ Palm Desktop 4.1.0](https://web.archive.org/web/20081218230338/http://www.palm.com/us/support/downloads/add_downloads.html).
 
-[^serial-drivers]: [Internet Archive.](https://archive.org/download/usa-19hs_win11_win10_driver/)
+[^serial-drivers]: Internet Archive: [Windows 10 / 11](https://archive.org/download/usa-19hs_win11_win10_driver/) or [Windows 98 / XP / 7 / 8](https://archive.org/download/eaton-tripp-lite-USA-19HS-drivers-windows-old-versions).
 
 [^serial-drivers-win10-32-cksum]: Checksum SHA-256: `508dd51272bb1acc2826466ab9fefb0abade0c0a5754577cfa5ee9ae2ab33f94`
 
