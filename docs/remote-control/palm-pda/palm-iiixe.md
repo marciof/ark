@@ -14,10 +14,20 @@ Backup infrared-based remote controls, without needing the original nor spares.
 - No dependency on internet/cloud-based services. [^logitech-discontinue-harmony]
 - Data portability/ownership.
 - Uses cheap, common, regular, AAA batteries for power.
-- Can use rechargeable batteries.
+- Can use rechargeable AAA batteries.
 - Long battery life.
 - Touch-screen, not limited to fixed buttons/layout.
-- Runs an OS, can install apps.
+- Runs an OS, can install apps for extensibility.
+- Easy to connect to modern PCs (serial cable adapters are cheap).
+
+### Alternatives
+
+_(Not verified.)_
+
+- Palm III: III, IIIx, IIIe
+- Palm VII: VII, VIIx
+- Handspring Visor: Solo, Deluxe, Platinum, Neo
+- Sony CLIÉ: PEG-SL10, PEG-S300
 
 [^logitech-stop-harmony]: > _"[...] [Logitech will no longer manufacture Harmony remotes](https://support.myharmony.com/en-us/harmony-remote-manufacturing-update)."_ ([Internet Archive](https://web.archive.org/web/20260706064659/https://support.myharmony.com/en-us/harmony-remote-manufacturing-update))
 
@@ -48,7 +58,7 @@ Backup infrared-based remote controls, without needing the original nor spares.
 > [`Note Pad` (available starting in Palm OS 4)](https://palmdb.net/app/og-note-pad) support was dropped [_after_ Palm Desktop 4.1.0](https://web.archive.org/web/20081218230338/http://www.palm.com/us/support/downloads/add_downloads.html).
 
 > [!Tip]
-> Increase sync transfer speed in the Palm side:
+> Increase sync transfer speed from the Palm side:
 > 1. Open `HotSync`, and under `Options`, go to `Connection Setup...`.
 > 2. `Edit...` the `Cradle/Cable` connection.
 > 3. In `Details...` choose the maximum `Speed` available.
