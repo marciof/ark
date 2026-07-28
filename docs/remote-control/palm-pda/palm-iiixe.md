@@ -33,7 +33,7 @@ Backup infrared-based remote controls, without needing the original nor spares.
 ### Windows
 
 1. [Install drivers for the serial cable](https://www.eaton.com/us/en-us/skuPage.USA-19HS-C.html#tab-2) [^serial-drivers]\:
-   - Windows 10, 32-bit: `eaton-tripp-lite-series-USA-19HS-driver-windows-7-8-server-2008-r2-v4.zip` [^serial-drivers-win10-32-cksum]
+   - Windows 10 (32-bit): `eaton-tripp-lite-series-USA-19HS-driver-windows-7-8-server-2008-r2-v4.zip` [^serial-drivers-win10-32-cksum]
    - Windows 11: `eaton-tripp-lite-series-USA-19HS-driver-win11-win10.zip` [^serial-drivers-win11-cksum]
 2. Connect serial cable, and verify it shows in `devmgmt.msc` under `Ports (COM & LPT)`.
 3. [Install Palm Desktop 4.1.0](https://palmdb.net/app/palm-desktop) [^palm-desktop]\: `PalmDesktop41ENG.exe` [^palm-desktop-cksum]
@@ -46,6 +46,12 @@ Backup infrared-based remote controls, without needing the original nor spares.
 
 > [!Note]
 > [`Note Pad` (available starting in Palm OS 4)](https://palmdb.net/app/og-note-pad) support was dropped [_after_ Palm Desktop 4.1.0](https://web.archive.org/web/20081218230338/http://www.palm.com/us/support/downloads/add_downloads.html).
+
+> [!Tip]
+> Increase sync transfer speed in the Palm side:
+> 1. Open `HotSync`, and under `Options`, go to `Connection Setup...`.
+> 2. `Edit...` the `Cradle/Cable` connection.
+> 3. In `Details...` choose the maximum `Speed` available.
 
 [^serial-drivers]: Internet Archive: [Windows 10 / 11](https://archive.org/download/usa-19hs_win11_win10_driver/) or [Windows 98 / XP / 7 / 8](https://archive.org/download/eaton-tripp-lite-USA-19HS-drivers-windows-old-versions).
 
