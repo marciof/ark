@@ -22,7 +22,7 @@ Backup infrared-based remote controls, without needing the original nor spares.
 
 ### Alternatives
 
-_(Not verified.)_
+_(Unverified.)_
 
 - Palm III: III, IIIx, IIIe
 - Palm VII: VII, VIIx
@@ -32,6 +32,15 @@ _(Not verified.)_
 [^logitech-stop-harmony]: > _"[...] [Logitech will no longer manufacture Harmony remotes](https://support.myharmony.com/en-us/harmony-remote-manufacturing-update)."_ ([Internet Archive](https://web.archive.org/web/20260706064659/https://support.myharmony.com/en-us/harmony-remote-manufacturing-update))
 
 [^logitech-discontinue-harmony]: > _"[...] [Logitech Harmony Remote Software no longer supports account creation or access to existing accounts for reprogramming, modifying, or making configuration changes to remotes](https://harmonyremote.com)."_ ([Internet Archive](https://web.archive.org/web/20251211222158/https://harmonyremote.com/))
+
+#### Dead Ends
+
+- [Sony RM-VL610 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-vl610) (great, but no flash memory, no raw code import)
+- Philips Pronto Neo TSU500 (finicky)
+- [Philips Prestigo SRU9600 Universal Remote Control](https://www.usa.philips.com/c-p/SRU9600_37/prestigo) (lengthy, finicky)
+- [Sony RM-AV3100 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-av3100) (large, finicky)
+- [Sony RM-VL710 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-vl710) (scarce, large, ugly)
+
 
 ## Setup
 
@@ -45,7 +54,7 @@ _(Not verified.)_
 1. [Install drivers for the serial cable](https://www.eaton.com/us/en-us/skuPage.USA-19HS-C.html#tab-2) [^serial-drivers]\:
    - Windows 10 (32-bit): `eaton-tripp-lite-series-USA-19HS-driver-windows-7-8-server-2008-r2-v4.zip` [^serial-drivers-win10-32-cksum]
    - Windows 11: `eaton-tripp-lite-series-USA-19HS-driver-win11-win10.zip` [^serial-drivers-win11-cksum]
-2. Connect serial cable, and verify it shows in `devmgmt.msc` under `Ports (COM & LPT)`.
+2. Connect serial cable, verify it shows in `devmgmt.msc` under `Ports (COM & LPT)`, and **take note of the COM port number**.
 3. [Install Palm Desktop 4.1.0](https://palmdb.net/app/palm-desktop) [^palm-desktop]\: `PalmDesktop41ENG.exe` [^palm-desktop-cksum]
    1. **Choose an install path that doesn't require admin rights**, so it can read its own database, and for `Note Pad` to work (it requires ActiveX).
    2. **Take note of the install path**, needed later for upgrading Palm OS.
