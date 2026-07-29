@@ -13,7 +13,7 @@ Backup infrared-based remote controls, without needing the original nor spares.
 - No dependency on third-party companies. [^logitech-stop-harmony]
 - No dependency on internet/cloud-based services. [^logitech-discontinue-harmony]
 - Data portability/ownership.
-- Uses cheap, common, regular, AAA batteries for power.
+- Uses cheap, common, regular AAA batteries for power.
 - Can use rechargeable AAA batteries.
 - Long battery life.
 - Touch-screen, not limited to fixed buttons/layout.
@@ -24,10 +24,10 @@ Backup infrared-based remote controls, without needing the original nor spares.
 
 _(Unverified.)_
 
-- Palm III: III, IIIx, IIIe
-- Palm VII: VII, VIIx
-- Handspring Visor: Solo, Deluxe, Platinum, Neo
-- Sony CLIÉ: PEG-SL10, PEG-S300
+- [Palm III](https://en.wikipedia.org/wiki/Palm_III): III, IIIx, IIIe
+- [Palm VII](https://en.wikipedia.org/wiki/Palm_VII): VII, VIIx
+- [Handspring Visor](https://en.wikipedia.org/wiki/Handspring,_Inc.#Visor_series): Solo, Deluxe, Platinum, Neo
+- Sony CLIÉ: [PEG-SL10](https://en.wikipedia.org/wiki/Sony_CLI%C3%89_PEG-SL10), [PEG-S300](https://en.wikipedia.org/wiki/List_of_Palm_OS_devices#S_Series)
 
 [^logitech-stop-harmony]: > _"[...] [Logitech will no longer manufacture Harmony remotes](https://support.myharmony.com/en-us/harmony-remote-manufacturing-update)."_ ([Internet Archive](https://web.archive.org/web/20260706064659/https://support.myharmony.com/en-us/harmony-remote-manufacturing-update))
 
