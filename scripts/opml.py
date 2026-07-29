@@ -72,6 +72,7 @@ def set_feed_attr_arg_cmd(
     print(opml.to_string(), file=output)
 
 
+# TODO add option to run an xpath query?
 def main(args: Optional[List[str]] = None) -> NoReturn:
     arg_parser = argparse.ArgumentParser(description=__doc__.strip())
     arg_parser.add_argument(
