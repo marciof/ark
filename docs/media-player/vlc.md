@@ -6,6 +6,7 @@ _(Last checked: v3.0.23)_
 
 [TODO settings file instead of UI]:<>
 [TODO embed video metadata in screenshots?]:<>
+[TODO write down codec prefs that work on Lenovo Yoga Book]:<>
 
 ## Media Duration in Window Title
 
