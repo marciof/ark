@@ -4,6 +4,9 @@ https://www.videolan.org
 
 _(Last checked: v3.0.23)_
 
+[TODO settings file instead of UI]:<>
+[TODO embed video metadata in screenshots?]:<>
+
 ## Media Duration in Window Title
 
 1. Open `Preferences`.
