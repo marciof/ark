@@ -13,7 +13,6 @@ ln -v -s "`realpath -e ext_cmd`" "`./path_to.py plugins`"
 ### Liferea
 
 <!-- TODO how to avoid logging out to apply env var changes? -->
-<!-- TODO use XDG (or Python platformdirs?) for paths -->
 
 Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cmd.plugin):
 
@@ -27,7 +26,12 @@ Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cm
 > locate net.sourceforge.liferea.desktop | xargs grep DBusActivatable
 > ```
 
+> [!Important]
+> A user's `~/.config` folder may be located elsewhere, as per the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir/). [^xdg-config]
+
 [^dbus-env-var]: > _"If DBusActivatable is true and the desktop file name looks like a valid application ID, then the Exec line will be ignored and your application will be started by way of D-Bus activation instead (using the name of the desktop file minus the .desktop extension as the application ID)."_
+
+[^xdg-config]: > _"There is a single base directory relative to which user-specific configuration files should be written [...] defined by the environment variable $XDG_CONFIG_HOME."_
 
 # Development
 
