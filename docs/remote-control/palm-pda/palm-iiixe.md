@@ -36,11 +36,12 @@ _(Unverified.)_
 #### Dead Ends
 
 - [Sony RM-VL610 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-vl610) (great, but has volatile memory, no raw code import)
+- [Samsung Galaxy S6](https://en.wikipedia.org/wiki/Samsung_Galaxy_S6) + [RCoid](https://www.rcoid.de/remotefiles.html) (good, but can't learn remotes, has data vendor lock-in)
 - Philips Pronto Neo TSU500 (finicky)
 - [Philips Prestigo SRU9600 Universal Remote Control](https://www.usa.philips.com/c-p/SRU9600_37/prestigo) (lengthy, finicky)
 - [Sony RM-AV3100 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-av3100) (large, finicky)
 - [Sony RM-VL710 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-vl710) (scarce, large, ugly)
-
+- [Logitech Harmony](https://en.wikipedia.org/wiki/Logitech_Harmony) (discontinued, has data vendor lock-in)
 
 ## Setup
 
