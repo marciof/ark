@@ -15,6 +15,8 @@
 #   - resolve symlinks and runs a config command
 # TODO check https://github.com/TheFrenchGhosty/TheFrenchGhostys-Ultimate-YouTube-DL-Scripts-Collection
 # TODO idea, accept `*.url` files
+#      https://learn.microsoft.com/en-us/windows/win32/lwef/internet-shortcuts
+#      https://nsis.sourceforge.io/Creating_internet_shortcuts
 
 set -o errexit -o nounset
 
