@@ -30,6 +30,7 @@ Rationale
 - Avoids polluting `$PATH`, and it's also too implicit.
 - Environment variables can be VCS-ed as "Configuration as Code".
 - Protocol handler registration (eg. `extcmd://`) is too involved.
+- An environment variable allows easy temporary changes.
 """
 
 

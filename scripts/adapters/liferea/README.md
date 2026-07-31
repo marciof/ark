@@ -10,9 +10,10 @@ ln -v -s "`realpath -e ext_cmd`" "`./path_to.py plugins`"
 
 ## Liferea
 
-Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cmd.plugin):
-
 <!-- TODO use XDG (or Python platformdirs?) for paths -->
+<!-- TODO how to avoid logging out to apply env var changes? -->
+
+Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cmd.plugin):
 
 1. Create a file [setting the variable in `~/.config/environment.d/*.conf`](https://www.freedesktop.org/software/systemd/man/latest/environment.d.html).
 2. Log out and log in to apply changes.
