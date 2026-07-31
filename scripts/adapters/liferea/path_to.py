@@ -31,12 +31,14 @@ def get_env_var_path(name: str, default: Callable[[], Path]) -> Path:
     return Path(value) if value is not None else default()
 
 
+# FIXME use `platformdirs`
 def get_feed_list_opml_path(app_name: str) -> Path:
     config_home = get_env_var_path('XDG_CONFIG_HOME',
         default=lambda: Path.home() / '.config')
     return config_home / app_name / 'feedlist.opml'
 
 
+# FIXME use `platformdirs`
 def get_plugins_path(app_name: str) -> Path:
     data_home = get_env_var_path('XDG_DATA_HOME',
         default=lambda: Path.home() / '.local' / 'share')

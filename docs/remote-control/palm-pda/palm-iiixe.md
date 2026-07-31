@@ -35,7 +35,7 @@ _(Unverified.)_
 
 #### Dead Ends
 
-- [Sony RM-VL610 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-vl610) (great, but no flash memory, no raw code import)
+- [Sony RM-VL610 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-vl610) (great, but has volatile memory, no raw code import)
 - Philips Pronto Neo TSU500 (finicky)
 - [Philips Prestigo SRU9600 Universal Remote Control](https://www.usa.philips.com/c-p/SRU9600_37/prestigo) (lengthy, finicky)
 - [Sony RM-AV3100 Integrated Remote Commander](https://www.sony.com/electronics/support/product/rm-av3100) (large, finicky)

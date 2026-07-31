@@ -112,6 +112,7 @@ class ExtCmdPlugin (
             '='.join(map(str, self.get_on_download_url())))
 
 
+    # FIXME `os.environ` is cached -- how to read the most current value?
     def get_on_download_url(self) -> Tuple[Optional[str], Optional[str]]:
         self.config_parser.read(self.plugin_info_path)
 
