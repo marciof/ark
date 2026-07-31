@@ -30,7 +30,7 @@ Rationale
 - Avoids polluting `$PATH`, and it's also too implicit.
 - Environment variables can be VCS-ed as "Configuration as Code".
 - Protocol handler registration (eg. `extcmd://`) is too involved.
-- An environment variable allows easy temporary changes.
+- An environment variable allows easier temporary changes.
 """
 
 
@@ -58,7 +58,7 @@ logging.basicConfig()
 # FIXME disable built-in Download Manager? eg.
 #       `gsettings set net.sf.liferea.plugins active-plugins "['ext_cmd', ...]"`
 # TODO see LibnotifyPlugin for QoL ideas to notify user of errors
-#   https://github.com/lwindolf/liferea/blob/v1.16.7/plugins/libnotify.py
+#      https://github.com/lwindolf/liferea/blob/v1.16.7/plugins/libnotify.py
 class ExtCmdPlugin (
         GObject.Object,
         Liferea.Activatable, # Required by `DownloadActivatable`.
@@ -113,7 +113,7 @@ class ExtCmdPlugin (
             '='.join(map(str, self.get_on_download_url())))
 
 
-    # FIXME `os.environ` is cached -- how to read the most current value?
+    # FIXME `os.environ` is cached -- read D-Bus/systemd changes?
     def get_on_download_url(self) -> Tuple[Optional[str], Optional[str]]:
         self.config_parser.read(self.plugin_info_path)
 
