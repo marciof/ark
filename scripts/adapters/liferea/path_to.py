@@ -15,6 +15,7 @@ References:
 
 # /// script
 # dependencies = [
+#   "platformdirs==4.11.0", # locate Liferea data/settings
 # ]
 # ///
 
@@ -23,26 +24,20 @@ References:
 import argparse
 import os
 from pathlib import Path
-from typing import List, Optional, NoReturn, Callable
+from typing import List, Optional, NoReturn
+
+# external
+import platformdirs
 
 
-def get_env_var_path(name: str, default: Callable[[], Path]) -> Path:
-    value = os.getenv(name)
-    return Path(value) if value is not None else default()
-
-
-# FIXME use `platformdirs`
 def get_feed_list_opml_path(app_name: str) -> Path:
-    config_home = get_env_var_path('XDG_CONFIG_HOME',
-        default=lambda: Path.home() / '.config')
-    return config_home / app_name / 'feedlist.opml'
+    return (platformdirs.user_config_path(appname=app_name, appauthor=False)
+        / 'feedlist.opml')
 
 
-# FIXME use `platformdirs`
 def get_plugins_path(app_name: str) -> Path:
-    data_home = get_env_var_path('XDG_DATA_HOME',
-        default=lambda: Path.home() / '.local' / 'share')
-    return data_home / app_name / 'plugins'
+    return (platformdirs.user_data_path(appname=app_name, appauthor=False)
+        / 'plugins')
 
 
 # TODO request Liferea cmdline flag to print paths
