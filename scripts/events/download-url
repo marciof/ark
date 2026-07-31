@@ -13,7 +13,6 @@
 #   - run a specific command that must be in PATH
 #   - run a command specified in an env var
 #   - resolve symlinks and runs a config command
-# TODO check https://github.com/TheFrenchGhosty/TheFrenchGhostys-Ultimate-YouTube-DL-Scripts-Collection
 # TODO idea, accept `*.url` files
 #      https://learn.microsoft.com/en-us/windows/win32/lwef/internet-shortcuts
 #      https://nsis.sourceforge.io/Creating_internet_shortcuts
@@ -40,9 +39,9 @@ download_via_media_downloader() {
         --auto-download --url "$1"
 }
 
-# FIXME split this script into generic vs download-specific?
-# FIXME call other alternatives if the default fails?
 # FIXME spawn in background always?
+# FIXME call other alternatives if the default fails?
+# TODO option for rolling downloads? eg. only the last `n` NRK news episodes
 for url; do
     notify-send 'Enclosure URL' "$url"
     download_via_youwee_cli "$url" 720
