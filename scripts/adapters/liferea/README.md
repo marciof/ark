@@ -1,8 +1,8 @@
 # Setup
 
-## Linux
+## Plugin
 
-### Plugin
+### Linux
 
 Symlink the provided plugin into the plugins folder:
 
@@ -10,9 +10,9 @@ Symlink the provided plugin into the plugins folder:
 ln -v -s "`realpath -e ext_cmd`" "`./path_to.py plugins`"
 ```
 
-### Liferea
+## Liferea
 
-<!-- TODO how to avoid logging out to apply env var changes? -->
+### Linux
 
 Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cmd.plugin):
 
@@ -39,6 +39,10 @@ Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cm
 [^dbus-env-var]: > _"If DBusActivatable is true and the desktop file name looks like a valid application ID, then the Exec line will be ignored and your application will be started by way of D-Bus activation instead (using the name of the desktop file minus the .desktop extension as the application ID)."_
 
 [^xdg-config]: > _"There is a single base directory relative to which user-specific configuration files should be written [...] defined by the environment variable $XDG_CONFIG_HOME."_
+
+### Windows
+
+1. Liferea isn't available natively for Windows, so [install WSL first](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps) to run it from within.
 
 # Development
 

@@ -28,6 +28,7 @@ download_via_youwee_cli() {
     # FIXME option for other video formats (eg. mp4 doesn't embed metadata)
     # FIXME embed subtitles
     # FIXME embed metadata
+    # TODO powershell.exe -Command 'Start-Process "shell:AppsFolder\com.vanloctech.youwee"'
     youwee --skip-live "--url=$1" "--quality=$2"
 }
 
@@ -39,7 +40,7 @@ download_via_media_downloader() {
         --auto-download --url "$1"
 }
 
-# FIXME spawn in background always?
+# FIXME ensure apps are always spawn in the background?
 # FIXME call other alternatives if the default fails?
 # TODO option for rolling downloads? eg. only the last `n` NRK news episodes
 for url; do
