@@ -1,11 +1,12 @@
 #!/bin/sh
 
 # Runs a command for each URL.
-# Calls `download_url_with_youwee` by default.
 #
 # Arguments: [URL ...]
 
+# FIXME refactor, cleanup
 # FIXME document (including dependencies and setup)
+#   sudo apt install libnotify-bin
 # FIXME test (including shellcheck)
 # FIXME error handling
 # FIXME proper extensibility, example ideas:
@@ -14,10 +15,72 @@
 #   - run a command specified in an env var
 #   - resolve symlinks and runs a config command
 # TODO idea, accept `*.url` files
-#      https://learn.microsoft.com/en-us/windows/win32/lwef/internet-shortcuts
-#      https://nsis.sourceforge.io/Creating_internet_shortcuts
+#   https://learn.microsoft.com/en-us/windows/win32/lwef/internet-shortcuts
+#   https://nsis.sourceforge.io/Creating_internet_shortcuts
 
 set -o errexit -o nounset
+
+locate_youwee_in_wsl() {
+    # Other alternatives that were explored:
+    #
+    # (A) Fastest, but too much parsing and hardcoding, making this brittle.
+    #
+    #    reg.exe query 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall' /s /f Youwee \
+    #    | tr -d '\r' \
+    #    | grep InstallLocation \
+    #    | grep -oP '[^\s]*\\.+$' \
+    #    | xargs -d '\n' wslpath
+    #
+    # (B) Slower, and still has some hardcoding.
+    #
+    #    powershell.exe -NonInteractive '(
+    #      Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*
+    #      | Where DisplayName -eq Youwee
+    #    ).InstallLocation'
+    #
+    # (C) Faster, but fails if the shortcut is missing from the Start Menu.
+    #
+    #    powershell.exe -NonInteractive '(
+    #        New-Object -ComObject Shell.Application
+    #    ).NameSpace(
+    #        "shell:AppsFolder"
+    #    ).ParseName(
+    #        "com.vanloctech.youwee"
+    #    ).ExtendedProperty(
+    #        "System.Link.TargetParsingPath"
+    #    )'
+    #
+    # (D) Even faster, and ditto.
+    #
+    #    cscript.exe /Nologo /E:JScript TEMPFILE.js
+    #
+    #    [TEMPFILE.js]
+    #    WScript.Echo(WScript.CreateObject('Shell.Application')
+    #      .NameSpace('shell:AppsFolder')
+    #      .ParseName('com.vanloctech.youwee')
+    #      .ExtendedProperty('System.Link.TargetParsingPath'));
+
+    # FIXME slow to run PowerShell, and slow to use `Get-Package`
+    powershell.exe -NonInteractive '(Get-Package -Name Youwee).Source' \
+        | tr -d '\r' \
+        | xargs -d '\n' wslpath
+}
+
+run_youwee_via_wsl() {
+    "$(locate_youwee_in_wsl)/youwee.exe" "$@"
+}
+
+is_in_wsl() {
+    command -v wslpath >/dev/null
+}
+
+run_youwee() {
+    if is_in_wsl; then
+        run_youwee_via_wsl "$@"
+    else
+        youwee "$@"
+    fi
+}
 
 # https://youwee.app
 # https://youwee.app/docs/cli/
@@ -29,7 +92,7 @@ download_via_youwee_cli() {
     # FIXME embed subtitles
     # FIXME embed metadata
     # TODO powershell.exe -Command 'Start-Process "shell:AppsFolder\com.vanloctech.youwee"'
-    youwee --skip-live "--url=$1" "--quality=$2"
+    run_youwee --skip-live "--url=$1" "--quality=$2"
 }
 
 # https://github.com/mhogomchungu/media-downloader

@@ -42,7 +42,7 @@ Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cm
 
 ### Windows
 
-1. Liferea isn't available natively for Windows, so [install WSL first](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps) to run it from within.
+Liferea isn't available natively for Windows, so [install WSL first](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps) to run it from within.
 
 # Development
 
