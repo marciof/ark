@@ -48,7 +48,14 @@ Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cm
 
 ### Windows
 
-Liferea isn't available natively for Windows, so [install WSL first](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps) to run it from within.
+1. Liferea isn't available natively for Windows, so [install WSL first](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps) to run it from within.
+2. Configure its browser selection to open URLs:
+   1. Install `xdg-utils`:
+      ```
+      apt install xdg-utils
+      ```
+   2. Go to `Preferences`, then `Browser`, then `External Browser Settings`.
+   3. Set `Manual` to  `xdg-open %s`.
 
 # Development
 
