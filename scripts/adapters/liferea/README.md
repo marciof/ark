@@ -4,7 +4,13 @@
 
 ### Linux
 
-Symlink the provided plugin into the plugins folder:
+Ensure the plugins folder exists:
+
+```shell
+./path_to.py plugins | xargs mkdir -v -p
+```
+
+Symlink the provided plugin into it:
 
 ```shell
 ln -v -s "`realpath -e ext_cmd`" "`./path_to.py plugins`"
