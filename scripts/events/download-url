@@ -70,12 +70,12 @@ run_youwee_via_wsl() {
     "$(locate_youwee_in_wsl)/youwee.exe" "$@"
 }
 
-is_in_wsl() {
+in_wsl() {
     command -v wslpath >/dev/null
 }
 
 run_youwee() {
-    if is_in_wsl; then
+    if in_wsl; then
         run_youwee_via_wsl "$@"
     else
         youwee "$@"
@@ -103,12 +103,17 @@ download_via_media_downloader() {
         --auto-download --url "$1"
 }
 
-# FIXME ensure apps are always spawn in the background?
-# FIXME call other alternatives if the default fails?
 # TODO option for rolling downloads? eg. only the last `n` NRK news episodes
 for url; do
-    notify-send 'Enclosure URL' "$url"
+    if ! in_wsl; then
+        # FIXME not currently working from within WSL
+        notify-send 'Enclosure URL' "$url"
+    fi
+
+    # FIXME ensure apps are always spawn in the background?
     download_via_youwee_cli "$url" 720
-#     download_via_media_downloader "$url"
-#    . yt_dlp.sh && yt_defaults "$url"
+
+    # FIXME call other alternatives if the default fails?
+    #   download_via_media_downloader "$url"
+    #   . yt_dlp.sh && yt_defaults "$url"
 done
