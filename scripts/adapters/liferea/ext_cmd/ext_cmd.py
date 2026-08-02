@@ -48,6 +48,7 @@ from typing import TextIO, Callable, List, Optional, Tuple
 from gi.repository import Gio, GObject, Liferea
 
 
+# FIXME not logging to syslog from within WSL
 # FIXME seems to be missing from outside the plugin
 # FIXME use level from `$ liferea --help-debug`?
 logging.basicConfig()
