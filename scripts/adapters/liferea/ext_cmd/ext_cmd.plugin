@@ -1,8 +1,13 @@
 [Plugin]
+
 Module=ext_cmd
 Loader=python
 Name=External Command
 Description=Runs external commands for different events
 
 [Configuration]
+
+# Environment variable that contains a path to an executable. Whenever there's
+# a new enclosure to be downloaded, the executable is run with its URL as the
+# only argument.
 OnDownloadUrlEnvVar=LIFEREA_ON_DOWNLOAD_URL
