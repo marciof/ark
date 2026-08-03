@@ -96,7 +96,7 @@ class ExtCmdPlugin (
         self.plugin_info_path = plugin_path.parent / (plugin_name + '.plugin')
         self.config_parser = configparser.ConfigParser()
 
-        # See https://docs.gtk.org/gio/flags.ApplicationFlags.html#is_service
+        # See https://api.pygobject.gnome.org/Gio-2.0/enum-ApplicationFlags.html#gi.repository.Gio.ApplicationFlags.IS_SERVICE
         # See https://dbus.freedesktop.org/doc/dbus-specification.html
         # See https://developer.gnome.org/documentation/guidelines/maintainer/integrating.html#d-bus-activation
         self.is_dbus_activatable: bool = (
