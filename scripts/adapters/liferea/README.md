@@ -1,6 +1,19 @@
-# Setup
+# Installation
 
 ## Plugin
+
+### Dependencies
+
+None, other than what Liferea provides, but helper scripts may have their own, specified as inline script metadata [^pep-723] that can be installed using:
+
+```shell
+pip install --requirements-from-script [...]
+```
+
+> [!Note]
+> Requires [pip v26.0](https://pip.pypa.io/en/stable/news/#v26-0) minimum.
+
+[^pep-723]: https://peps.python.org/pep-0723/
 
 ### Linux
 
