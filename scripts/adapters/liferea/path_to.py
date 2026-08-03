@@ -4,7 +4,7 @@
 """
 Prints the path to a Liferea file/folder.
 
-Folders always end with the OS' path separator.
+Paths to folders always end with the OS' path separator.
 
 References:
 
