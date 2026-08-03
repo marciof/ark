@@ -9,7 +9,7 @@ Paths to folders always end with the OS' path separator.
 References:
 
 - XDG Spec: https://specifications.freedesktop.org/basedir/latest/#variables
-- Liferea man page: https://github.com/lwindolf/liferea/blob/v1.16.7/man/liferea.1
+- Liferea man page: https://github.com/lwindolf/liferea/blob/v1.16.13/man/liferea.1
 """
 
 

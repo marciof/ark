@@ -59,7 +59,7 @@ logging.basicConfig()
 # FIXME disable built-in Download Manager? eg.
 #       `gsettings set net.sf.liferea.plugins active-plugins "['ext_cmd', ...]"`
 # TODO see LibnotifyPlugin for QoL ideas to notify user of errors
-#      https://github.com/lwindolf/liferea/blob/v1.16.7/plugins/libnotify.py
+#      https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/libnotify.py
 class ExtCmdPlugin (
         GObject.Object,
         Liferea.Activatable, # Required by `DownloadActivatable`.
@@ -68,9 +68,9 @@ class ExtCmdPlugin (
     """
     References:
 
-    - https://github.com/lwindolf/liferea/blob/v1.16.7/plugins/README.md#plugin-tutorial
-    - https://github.com/lwindolf/liferea/blob/v1.16.7/plugins/download-manager.py
-    - https://github.com/lwindolf/liferea/blob/v1.16.7/src/plugins/download_activatable.c
+    - https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/README.md#plugin-tutorial
+    - https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/download-manager.py
+    - https://github.com/lwindolf/liferea/blob/v1.16.13/src/plugins/download_activatable.c
     - https://github.com/mozbugbox/liferea-plugin-studio
     """
 
