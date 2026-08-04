@@ -42,7 +42,7 @@ import os
 from pathlib import Path
 import subprocess
 from threading import Thread
-from typing import TextIO, Callable, List, Optional, Tuple
+from typing import Callable, Generator, Optional, TextIO
 
 # internal
 from gi.repository import Gio, GObject, Liferea
@@ -54,12 +54,60 @@ from gi.repository import Gio, GObject, Liferea
 logging.basicConfig()
 
 
+# FIXME error handling
+class LifereaPlugins:
+
+    """
+    References:
+
+    - https://api.pygobject.gnome.org/Gio-2.0/structure-SettingsSchemaSource.html
+    - https://api.pygobject.gnome.org/Gio-2.0/class-Settings.html#gi.repository.Gio.Settings
+    """
+
+    def __init__(self, logger: logging.Logger):
+        schema_id = 'net.sf.liferea.plugins'
+        self.logger = logger
+
+        self.logger.debug('Get default system schema source.')
+        schema_source = Gio.SettingsSchemaSource.get_default()
+
+        self.logger.debug('Lookup schema ID: %s', schema_id)
+        self.schema = schema_source.lookup(schema_id, recursive=False)
+        self.logger.info(
+            'Plugins schema ID "%s" found: %s',
+            schema_id,
+            self.schema.get_path())
+
+        self.settings = Gio.Settings.new(schema_id)
+
+
+    def list_active(self) -> set[str]:
+        key_name = 'active-plugins'
+
+        if not self.schema.has_key(key_name):
+            # FIXME exception if active plugins aren't found?
+            self.logger.error(
+                'Active plugins schema key not found: %s', key_name)
+            return set()
+        else:
+            # FIXME plugin order is lost -- does it matter?
+            return set(self.settings.get_strv(key_name))
+
+
+    def disable(self, name: str) -> None:
+        self.logger.info('Disabling plugin: %s', name)
+
+        # FIXME possible race condition -- does it matter?
+        plugins = list(self.list_active() - {name})
+        self.settings.set_strv('active-plugins', plugins)
+
+
+# TODO refactor out config handling?
+# TODO refactor out d-bus handling?
 # FIXME tests (including mypy, pycodestyle)
 # FIXME error handling
-# FIXME disable built-in Download Manager? eg.
-#       `gsettings set net.sf.liferea.plugins active-plugins "['ext_cmd', ...]"`
-# TODO see LibnotifyPlugin for QoL ideas to notify user of errors
-#      https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/libnotify.py
+# FIXME see LibnotifyPlugin for QoL ideas to notify user of errors
+#       https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/libnotify.py
 class ExtCmdPlugin (
         GObject.Object,
         Liferea.Activatable, # Required by `DownloadActivatable`.
@@ -73,6 +121,8 @@ class ExtCmdPlugin (
     - https://github.com/lwindolf/liferea/blob/v1.16.13/src/plugins/download_activatable.c
     - https://github.com/mozbugbox/liferea-plugin-studio
     """
+
+    type ConfigKey = str | tuple[str, type[str | bool]]
 
     __gtype_name__ = __qualname__
 
@@ -89,12 +139,27 @@ class ExtCmdPlugin (
         plugin_path: Path = Path(__file__)
         plugin_name: str = plugin_path.stem
 
-        app: Optional[Gio.Application] = Gio.Application.get_default()
-        app_flags: Optional[Gio.ApplicationFlags] = (
-            app.get_flags() if app is not None else None)
+        self.logger: logging.Logger = logging.getLogger('plugin.' + plugin_name)
+        self.logger.setLevel(logging.DEBUG)
+        self.logger.debug('__init__: %s', plugin_path)
 
         self.plugin_info_path = plugin_path.parent / (plugin_name + '.plugin')
         self.config_parser = configparser.ConfigParser()
+
+        self.logger.debug(
+            'Config: on-download URL env var: $%s',
+            '='.join(map(str, self.get_on_download_url_config())))
+
+        self.logger.debug(
+            'Config: disable download manager plugin? %s',
+            '='.join(map(str, self.get_download_manager_config())))
+
+        self.plugins = LifereaPlugins(self.logger)
+        self.logger.debug('Active plugins: %s', self.plugins.list_active())
+
+        app: Optional[Gio.Application] = Gio.Application.get_default()
+        app_flags: Optional[Gio.ApplicationFlags] = (
+            app.get_flags() if app is not None else None)
 
         # See https://api.pygobject.gnome.org/Gio-2.0/enum-ApplicationFlags.html#gi.repository.Gio.ApplicationFlags.IS_SERVICE
         # See https://dbus.freedesktop.org/doc/dbus-specification.html
@@ -103,25 +168,36 @@ class ExtCmdPlugin (
             app_flags is not None
             and (app_flags & Gio.ApplicationFlags.IS_SERVICE) != 0)
 
-        self.logger: logging.Logger = logging.getLogger('plugin.' + plugin_name)
-        self.logger.setLevel(logging.DEBUG)
-
         self.logger.debug(
-            '__init__ path=%s; dbus=%s; flags=%s; $%s',
-            plugin_path,
+            'D-Bus Activatable? %s; flags=%s',
             self.is_dbus_activatable,
-            bin(app_flags) if app_flags is not None else None,
-            '='.join(map(str, self.get_on_download_url())))
+            bin(app_flags) if app_flags is not None else None)
+
+
+    def get_config(self, key: ConfigKey, *keys: ConfigKey) \
+            -> Generator[Optional[str | bool]]:
+
+        self.config_parser.read(self.plugin_info_path)
+        section_name = 'Configuration'
+
+        get_value_by_type = {
+            str: partial(self.config_parser.get, section=section_name),
+            bool: partial(self.config_parser.getboolean, section=section_name),
+        }
+
+        for key_name_type in (key,) + keys:
+            if isinstance(key_name_type, str):
+                key_name_type = (key_name_type, str)
+
+            (key_name, key_type) = key_name_type
+            yield get_value_by_type[key_type](option=key_name, fallback=None)
 
 
     # FIXME `os.environ` is cached -- read D-Bus/systemd changes?
-    def get_on_download_url(self) -> Tuple[Optional[str], Optional[str]]:
-        self.config_parser.read(self.plugin_info_path)
+    def get_on_download_url_config(self) \
+            -> tuple[Optional[str], Optional[str]]:
 
-        env_var = self.config_parser.get(
-            section='Configuration',
-            option='OnDownloadUrlEnvVar',
-            fallback=None)
+        (env_var,) = self.get_config('OnDownloadUrlEnvVar')
 
         if env_var is None:
             return (None, None)
@@ -129,9 +205,22 @@ class ExtCmdPlugin (
             return (env_var, os.getenv(env_var))
 
 
+    def get_download_manager_config(self) \
+            -> tuple[Optional[str], Optional[bool]]:
+
+        return self.get_config(
+            'DownloadManagerPlugin',
+            ('DisableDownloadManagerPlugin', bool))
+
+
     # inherit Liferea.Activatable
     def do_activate(self) -> None:
         self.logger.info('Activate')
+        (plugin_name, should_disable) = self.get_download_manager_config()
+        self.logger.info('Disable "%s" plugin? %s', plugin_name, should_disable)
+
+        if should_disable:
+            self.plugins.disable(plugin_name)
 
 
     # inherit Liferea.Activatable
@@ -141,12 +230,13 @@ class ExtCmdPlugin (
 
     # inherit Liferea.DownloadActivatable
     def do_download(self, url: str) -> None:
-        (env_var, command) = self.get_on_download_url()
+        (env_var, command) = self.get_on_download_url_config()
 
         if command is not None:
             self.logger.info('Download command=%s; url=%s', command, url)
             self.run_ext_cmd([command, url])
         else:
+            # FIXME separation of concerns, this belongs in the env var lookup
             self.logger.error(
                 'Download aborted: $%s not set: looked in %s',
                 env_var,
@@ -158,9 +248,9 @@ class ExtCmdPlugin (
                     env_var)
 
 
-    # TODO would be nice to optionally pass the feed article title to ext cmds
+    # TODO might be nice to optionally pass the feed article title to ext cmds
     # TODO might be nice to use `shlex.split` and/or `os.path.expanduser/vars`
-    def run_ext_cmd(self, command: List[str]) -> None:
+    def run_ext_cmd(self, command: list[str]) -> None:
         process = subprocess.Popen(command,
             text=True,
             stdout=subprocess.PIPE,

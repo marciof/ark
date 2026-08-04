@@ -11,3 +11,10 @@ Description=Runs external commands for different events
 # a new enclosure to be downloaded, the executable is run with its URL as the
 # only argument.
 OnDownloadUrlEnvVar=LIFEREA_ON_DOWNLOAD_URL
+
+# Name of the built-in download manager plugin.
+DownloadManagerPlugin=download-manager
+
+# Whether or not to disable the built-in download manager plug-in during
+# activation of this one.
+DisableDownloadManagerPlugin=true
