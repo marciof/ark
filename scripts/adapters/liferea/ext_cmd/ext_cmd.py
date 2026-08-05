@@ -14,6 +14,8 @@ Reinstates the external downloader tool functionality that was removed in
 an environment variable to specify what command to run, with an enclosure URL
 as its only argument.
 
+Optionally, disables the built-in download manager.
+
 Motivation
 ^^^^^^^^^^
 
@@ -55,6 +57,8 @@ logging.basicConfig()
 
 
 # FIXME error handling
+# FIXME bring back the `Gio` alternative to avoid depending on dev pkgs
+# FIXME document missing dev pkgs: `apt install gir1.2-peas-2`
 class LifereaPlugins:
 
     """
@@ -159,6 +163,13 @@ class ExtCmdPlugin (
 
     def get_config(self, key: ConfigKey, *keys: ConfigKey) \
             -> Generator[Optional[str | bool]]:
+
+        """
+        References:
+
+        - https://gnome.pages.gitlab.gnome.org/libpeas/libpeas-2/class.PluginInfo.html
+        - https://docs.gtk.org/glib/struct.KeyFile.html
+        """
 
         self.config_parser.read(self.plugin_info_path)
         section_name = 'Configuration'

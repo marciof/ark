@@ -1,6 +1,6 @@
-# Installation
+# Setup
 
-<!-- TODO test in a VM? CI? -->
+<!-- TODO test in a VM/lightweight container? CI? -->
 
 ## Plugin
 
