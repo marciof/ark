@@ -81,8 +81,6 @@ class LifereaPlugins:
             self.logger.error('Plugin not found: %s', name)
         else:
             self.engine.unload_plugin(plugin)
-            self.logger.info(
-                'Plugin "%s" unloaded? %s', name, not plugin.is_loaded())
 
 
 # TODO refactor out config handling?
