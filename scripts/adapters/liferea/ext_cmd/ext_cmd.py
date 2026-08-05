@@ -146,6 +146,7 @@ class ExtCmdPlugin (
         self.plugin_info_path = plugin_path.parent / (plugin_name + '.plugin')
         self.config_parser = configparser.ConfigParser()
 
+        # FIXME warn at startup if the env var is not defined
         self.logger.debug(
             'Config: on-download URL env var: $%s',
             '='.join(map(str, self.get_on_download_url_config())))

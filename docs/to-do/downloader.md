@@ -20,6 +20,7 @@
   - stealth browser as a localhost proxy?
   - https://en.wikipedia.org/wiki/Model_Context_Protocol
 - via HTTP impersonation? might be more complex to parse w/o JavaScript
+  - https://github.com/lexiforest/curl_cffi
   - https://github.com/lexiforest/curl-impersonate
   - https://github.com/jpjacobpadilla/Stealth-Requests
 - via external tool/library/API?
