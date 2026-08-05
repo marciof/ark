@@ -45,7 +45,7 @@ from threading import Thread
 from typing import Callable, Generator, Optional, TextIO
 
 # internal
-from gi.repository import Gio, GObject, Liferea
+from gi.repository import Gio, GObject, Liferea, Peas
 
 
 # FIXME not logging to syslog from within WSL
@@ -60,46 +60,29 @@ class LifereaPlugins:
     """
     References:
 
-    - https://api.pygobject.gnome.org/Gio-2.0/structure-SettingsSchemaSource.html
-    - https://api.pygobject.gnome.org/Gio-2.0/class-Settings.html#gi.repository.Gio.Settings
+    - https://gnome.pages.gitlab.gnome.org/libpeas/libpeas-2/
     """
 
     def __init__(self, logger: logging.Logger):
-        schema_id = 'net.sf.liferea.plugins'
         self.logger = logger
-
-        self.logger.debug('Get default system schema source.')
-        schema_source = Gio.SettingsSchemaSource.get_default()
-
-        self.logger.debug('Lookup schema ID: %s', schema_id)
-        self.schema = schema_source.lookup(schema_id, recursive=False)
-        self.logger.info(
-            'Plugins schema ID "%s" found: %s',
-            schema_id,
-            self.schema.get_path())
-
-        self.settings = Gio.Settings.new(schema_id)
+        self.engine = Peas.Engine.get_default()
 
 
     def list_active(self) -> set[str]:
-        key_name = 'active-plugins'
-
-        if not self.schema.has_key(key_name):
-            # FIXME exception if active plugins aren't found?
-            self.logger.error(
-                'Active plugins schema key not found: %s', key_name)
-            return set()
-        else:
-            # FIXME plugin order is lost -- does it matter?
-            return set(self.settings.get_strv(key_name))
+        # FIXME plugin order is lost -- does it matter?
+        return set(self.engine.dup_loaded_plugins())
 
 
     def disable(self, name: str) -> None:
         self.logger.info('Disabling plugin: %s', name)
+        plugin = self.engine.get_plugin_info('download-manager')
 
-        # FIXME possible race condition -- does it matter?
-        plugins = list(self.list_active() - {name})
-        self.settings.set_strv('active-plugins', plugins)
+        if plugin is None:
+            self.logger.error('Plugin not found: %s', name)
+        else:
+            self.engine.unload_plugin(plugin)
+            self.logger.info(
+                'Plugin "%s" unloaded? %s', name, not plugin.is_loaded())
 
 
 # TODO refactor out config handling?
@@ -120,6 +103,7 @@ class ExtCmdPlugin (
     - https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/download-manager.py
     - https://github.com/lwindolf/liferea/blob/v1.16.13/src/plugins/download_activatable.c
     - https://github.com/mozbugbox/liferea-plugin-studio
+    - https://api.pygobject.gnome.org/GObject-2.0/index.html
     """
 
     type ConfigKey = str | tuple[str, type[str | bool]]
@@ -214,9 +198,11 @@ class ExtCmdPlugin (
             ('DisableDownloadManagerPlugin', bool))
 
 
+    # FIXME use `@override`?
     # inherit Liferea.Activatable
     def do_activate(self) -> None:
         self.logger.info('Activate')
+
         (plugin_name, should_disable) = self.get_download_manager_config()
         self.logger.info('Disable "%s" plugin? %s', plugin_name, should_disable)
 
@@ -224,11 +210,13 @@ class ExtCmdPlugin (
             self.plugins.disable(plugin_name)
 
 
+    # FIXME use `@override`?
     # inherit Liferea.Activatable
     def do_deactivate(self) -> None:
         self.logger.info('Deactivate')
 
 
+    # FIXME use `@override`?
     # inherit Liferea.DownloadActivatable
     def do_download(self, url: str) -> None:
         (env_var, command) = self.get_on_download_url_config()

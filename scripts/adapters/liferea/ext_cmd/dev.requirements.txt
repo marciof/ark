@@ -1,4 +1,5 @@
 # https://github.com/pygobject/pygobject-stubs/blob/master/CHANGELOG.md
+# TODO add libpeas
 PyGObject-stubs==2.17.0 --config-settings config=Gtk3
 
 # https://pypi.org/project/gengir/#history
