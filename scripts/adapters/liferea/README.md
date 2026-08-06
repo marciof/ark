@@ -1,6 +1,6 @@
 # Setup
 
-<!-- TODO test in a VM/lightweight container? CI? -->
+<!-- TODO test in a VM/lightweight container? CI? WSL orchestration? -->
 
 ## Plugin
 

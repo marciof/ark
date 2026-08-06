@@ -9,6 +9,7 @@ _(Last checked: v3.0.23)_
 <!-- TODO write down codec prefs that work on Lenovo Yoga Book -->
 <!-- TODO sync settings across devices? -->
 <!-- TODO sync current video position across devices? -->
+<!-- TODO shortcut to reset audio level to 100% -->
 
 ## Media Duration in Window Title
 
