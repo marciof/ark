@@ -14,7 +14,8 @@ Reinstates the external downloader tool functionality that was removed in
 an environment variable to specify what command to run, with an enclosure URL
 as its only argument.
 
-Optionally, disables the built-in download manager.
+Optionally, also disables the built-in download manager to prevent conflicts
+and potential repeated downloads.
 
 Motivation
 ^^^^^^^^^^
@@ -36,6 +37,11 @@ Rationale
 """
 
 
+# TODO error handling
+# TODO tests (+ mypy + ycodestyle)
+# TODO document (+ dependencies + setup)
+
+
 # stdlib
 import configparser
 from functools import partial
@@ -52,15 +58,14 @@ gi.require_version('Peas', '2')
 from gi.repository import Gio, GObject, Liferea, Peas
 
 
-# FIXME not logging to syslog from within WSL
-# FIXME seems to be missing from outside the plugin
-# FIXME use level from `$ liferea --help-debug`?
+# TODO not logging to syslog from within WSL
+# TODO seems to be missing from inside Liferea, but outside the plugin
+# TODO use level from `$ liferea --help-debug`?
 logging.basicConfig()
 
 
-# FIXME error handling
-# FIXME bring back the `Gio` alternative to avoid depending on dev pkgs
-# FIXME document missing dev pkgs: `apt install gir1.2-peas-2`
+# TODO bring back the `Gio` alternative to avoid depending on dev pkgs?
+# TODO document missing dev pkgs: `apt install gir1.2-peas-2`
 class LifereaPlugins:
 
     """
@@ -75,7 +80,7 @@ class LifereaPlugins:
 
 
     def list_active(self) -> set[str]:
-        # FIXME plugin order is lost -- does it matter?
+        # TODO does plugin order matter?
         return set(self.engine.dup_loaded_plugins())
 
 
@@ -91,11 +96,10 @@ class LifereaPlugins:
 
 # TODO refactor out config handling?
 # TODO refactor out d-bus handling?
-# FIXME tests (including mypy, pycodestyle)
-# FIXME error handling
-# FIXME see LibnotifyPlugin for QoL ideas to notify user of errors
-#       https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/libnotify.py
+# TODO see LibnotifyPlugin for QoL ideas to notify user of errors
+#      https://github.com/lwindolf/liferea/blob/v1.16.13/plugins/libnotify.py
 class ExtCmdPlugin (
+
         GObject.Object,
         Liferea.Activatable, # Required by `DownloadActivatable`.
         Liferea.DownloadActivatable):
@@ -120,7 +124,7 @@ class ExtCmdPlugin (
     shell = GObject.property(type=Liferea.Shell)
 
 
-    # FIXME instantiated 2x
+    # TODO instantiated twice at app startup?
     def __init__(self):
         super().__init__()
 
@@ -134,7 +138,7 @@ class ExtCmdPlugin (
         self.plugin_info_path = plugin_path.parent / (plugin_name + '.plugin')
         self.config_parser = configparser.ConfigParser()
 
-        # FIXME warn at startup if the env var is not defined
+        # TODO warn at startup if the env var is not defined
         self.logger.debug(
             'Config: on-download URL env var: $%s',
             '='.join(map(str, self.get_on_download_url_config())))
@@ -189,7 +193,6 @@ class ExtCmdPlugin (
             yield get_value_by_type[key_type](option=key_name, fallback=None)
 
 
-    # FIXME `os.environ` is cached -- read D-Bus/systemd changes?
     def get_on_download_url_config(self) \
             -> tuple[Optional[str], Optional[str]]:
 
@@ -209,7 +212,7 @@ class ExtCmdPlugin (
             ('DisableDownloadManagerPlugin', bool))
 
 
-    # FIXME use `@override`?
+    # TODO use `@override`?
     # inherit Liferea.Activatable
     def do_activate(self) -> None:
         self.logger.info('Activate')
@@ -221,13 +224,13 @@ class ExtCmdPlugin (
             self.plugins.disable(plugin_name)
 
 
-    # FIXME use `@override`?
+    # TODO use `@override`?
     # inherit Liferea.Activatable
     def do_deactivate(self) -> None:
         self.logger.info('Deactivate')
 
 
-    # FIXME use `@override`?
+    # TODO use `@override`?
     # inherit Liferea.DownloadActivatable
     def do_download(self, url: str) -> None:
         (env_var, command) = self.get_on_download_url_config()
@@ -236,7 +239,7 @@ class ExtCmdPlugin (
             self.logger.info('Download command=%s; url=%s', command, url)
             self.run_ext_cmd([command, url])
         else:
-            # FIXME separation of concerns, this belongs in the env var lookup
+            # TODO separation of concerns, this belongs in the env var lookup
             self.logger.error(
                 'Download aborted: $%s not set: looked in %s',
                 env_var,
@@ -248,8 +251,6 @@ class ExtCmdPlugin (
                     env_var)
 
 
-    # TODO might be nice to optionally pass the feed article title to ext cmds
-    # TODO might be nice to use `shlex.split` and/or `os.path.expanduser/vars`
     def run_ext_cmd(self, command: list[str]) -> None:
         process = subprocess.Popen(command,
             text=True,

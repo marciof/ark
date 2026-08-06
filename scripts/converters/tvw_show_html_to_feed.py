@@ -7,6 +7,7 @@ Converts a TVW Show page's HTML in `stdin` to an episodes RSS feed in `stdout`.
 https://tvw.org/shows/
 """
 
+
 # /// script
 # dependencies = [
 #   "beautifulsoup4==4.12.3", # parse/search show's HTML for show/episode's info
@@ -15,10 +16,12 @@ https://tvw.org/shows/
 # ]
 # ///
 
-# FIXME document
-# FIXME test
-# FIXME error handling
-# FIXME proper logging (including to syslog)
+
+# TODO error handling
+# TODO tests (+ mypy + pycodestyle)
+# TODO document (+ dependencies + setup)
+# TODO logging (+ syslog)
+
 
 # stdlib
 from datetime import datetime as DateTime
@@ -42,7 +45,7 @@ def find_show_description(soup: Tag) -> str:
 
 
 def find_episode_published_date(ep_soup: Tag) -> DateTime:
-    # FIXME find/guess proper timezone
+    # TODO find/guess proper timezone
     dates = search_dates(
         ' '.join(map(Tag.get_text, ep_soup.select('time'))),
         settings={'RETURN_AS_TIMEZONE_AWARE': True})
@@ -70,7 +73,7 @@ def convert_html_to_feed(html: str) -> FeedGenerator:
         feed_entry.title(ep_title)
         feed_entry.link(href=ep_url)
 
-        # FIXME should this use `application/x-shockwave-flash` like YouTube does?
+        # TODO use `application/x-shockwave-flash` like YouTube?
         feed_entry.enclosure(url=ep_url, type='text/html', length='')
 
         feed_entry.published(ep_datetime)
@@ -80,12 +83,12 @@ def convert_html_to_feed(html: str) -> FeedGenerator:
 
 
 if __name__ == '__main__':
-    # FIXME avoid reading input all at once?
+    # TODO avoid reading input all at once?
     html = sys.stdin.read()
 
-    # FIXME move to the liferea module
+    # TODO move to the liferea module?
     if len(html) == 0:
-        # FIXME have Liferea not call a converter with no data
+        # TODO have Liferea not call a converter with no data
         # If the source page returns an HTTP 304 Not Modified, then Liferea
         # determines the source TVW page hasn't changed since the last update,
         # and then seems to still invoke this conversion filter with an empty stdin.
@@ -94,5 +97,5 @@ if __name__ == '__main__':
 
     feed = convert_html_to_feed(html)
 
-    # FIXME print directly to stdout?
+    # TODO print directly to stdout?
     print(feed.rss_str(pretty=True, encoding='unicode', xml_declaration=False))

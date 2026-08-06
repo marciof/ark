@@ -7,18 +7,19 @@ OPML parsing and handling helpers.
 http://opml.org/spec2.opml
 """
 
+
 # /// script
 # dependencies = [
 #   "defusedxml==0.7.1", # parse/modify/generate OPML
 # ]
 # ///
 
-# FIXME document
-# FIXME test
-# FIXME error handling
-# FIXME proper logging (including to syslog)
-# FIXME add command for setting encAutoDownload=true?
-# FIXME add command for setting filtercmd?
+
+# TODO error handling
+# TODO tests (+ mypy + pycodestyle)
+# TODO document (+ dependencies + setup)
+# TODO logging (+ syslog)
+
 
 # stdlib
 import argparse
@@ -28,7 +29,7 @@ from typing import Iterator, List, Optional, TextIO, NoReturn
 from xml.etree.ElementTree import Element
 
 # external
-# FIXME missing type stubs for some external libraries
+# TODO missing type stubs for some external libraries
 import defusedxml.ElementTree as ElementTree  # type: ignore
 
 
@@ -73,8 +74,11 @@ def set_feed_attr_arg_cmd(
 
 
 # TODO add option to run an xpath query?
+# TODO add command for setting encAutoDownload=true?
+# TODO add command for setting filtercmd?
 def main(args: Optional[List[str]] = None) -> NoReturn:
     arg_parser = argparse.ArgumentParser(description=__doc__.strip())
+
     arg_parser.add_argument(
         '-p', '--path',
         type=TextIoArgType,

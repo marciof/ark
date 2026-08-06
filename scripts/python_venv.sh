@@ -4,7 +4,7 @@
 #
 # Arguments: [pass-through]
 
-# FIXME make Python files shebang point to venv instead?
+# TODO make Python files shebang point to venv instead?
 
 set -o errexit -o nounset
 

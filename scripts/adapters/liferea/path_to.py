@@ -20,6 +20,11 @@ References:
 # ///
 
 
+# TODO error handling
+# TODO tests (+ mypy + pycodestyle)
+# TODO document (+ dependencies + setup)
+
+
 # stdlib
 import argparse
 import os
@@ -40,10 +45,8 @@ def get_plugins_path(app_name: str) -> Path:
         / 'plugins')
 
 
-# TODO request Liferea cmdline flag to print paths
-#      or via `gsettings list-recursively org.gnome.feed.Reader`
-# FIXME tests (including mypy, pycodestyle)
-# FIXME error handling
+# TODO request Liferea cmdline flag to print paths?
+#      or via `gsettings list-recursively org.gnome.feed.Reader`?
 def main(args: Optional[List[str]] = None) -> NoReturn:
     arg_parser = argparse.ArgumentParser(description=__doc__.strip())
     cmd_parser = arg_parser.add_subparsers(required=True)
@@ -58,7 +61,7 @@ def main(args: Optional[List[str]] = None) -> NoReturn:
     path = parsed_args.func(app_name='liferea')
 
     if path.is_dir():
-        # FIXME check if forcing a trailing separator is cross-platform
+        # TODO is forcing a trailing separator cross-platform?
         path = str(path) + os.sep
 
     print(path)

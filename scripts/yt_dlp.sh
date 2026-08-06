@@ -10,10 +10,11 @@
 # ]
 # ///
 
-# FIXME document (including dependencies and setup)
-# FIXME test (including shellcheck)
-# FIXME error handling
-# FIXME proper logging (including to syslog)
+# TODO refactor
+# TODO error handling
+# TODO test (+ shellcheck)
+# TODO document (+ dependencies + setup)
+# TODO logging (+ syslog)
 # TODO check https://github.com/TheFrenchGhosty/TheFrenchGhostys-Ultimate-YouTube-DL-Scripts-Collection
 
 set -o errexit -o nounset
@@ -44,7 +45,9 @@ yt_non_live() {
 
 # Arguments: URL
 # Exit: 0 if live, 1 otherwise
-# FIXME merge into `yt_defaults` using post-processing filters?
+# TODO merge into `yt_defaults` using post-processing filters?
+#  - Plugins: https://github.com/yt-dlp/yt-dlp#plugins
+#  - `--exec` / post-processing: https://github.com/yt-dlp/yt-dlp#post-processing-options
 yt_is_livestream() {
     # Some upcoming livestreams don't have a video format available yet,
     # so ignore related warnings and errors.
