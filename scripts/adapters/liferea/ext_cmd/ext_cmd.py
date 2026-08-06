@@ -47,6 +47,8 @@ from threading import Thread
 from typing import Callable, Generator, Optional, TextIO
 
 # internal
+import gi
+gi.require_version('Peas', '2')
 from gi.repository import Gio, GObject, Liferea, Peas
 
 
