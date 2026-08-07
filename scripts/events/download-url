@@ -15,6 +15,10 @@
 # TODO skip video if mtime > 1 year (eg. Last Week Tonight uploads old episodes)
 # TODO make it possible to starts watching a video before completing download?
 
+# TODO do filenames with emojis break Dropbox syncing?
+#   - https://github.com/woodgern/confusables
+#   - is Syncthing better? faster in a local network between devices?
+
 # TODO proper extensibility, example ideas:
 #   - ext_cmd/on_enclosure_url.d/* (runs chmod +x files)
 #   - run a specific command that must be in PATH
