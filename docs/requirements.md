@@ -28,4 +28,4 @@
 
 - Linux
 - Android
-- Windows: 10 64-bit, 11 64-bit
+- Windows: 10 (64-bit), 11 (64-bit)

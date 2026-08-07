@@ -41,6 +41,24 @@ Rationale
 # TODO tests (+ mypy + ycodestyle)
 # TODO document (+ dependencies + setup)
 
+# TODO could setup be simpler w/ a `./ext_cmd.d/*` style folder?
+# TODO could setup be simpler w/ sandboxing an old fixed version?
+
+# TODO helper script to get an RSS feed URL from a YouTube channel/playlist?
+#   - https://codemadness.org/sfeed.html
+#   - check what/how Liferea does it
+
+# TODO need to find alternatives to Liferea? it removed the external downloader
+#   tool option (on v1.15.9), and may remove features currently in use, make
+#   things more complicated, etc?
+#   - RSS Guard, https://github.com/martinrotter/rssguard/issues/1952
+#   - Akregator, https://github.com/KDE/akregator
+#   - Alligator, https://github.com/kde/alligator
+#   - Thunderbird, https://reviewers.addons.thunderbird.net/en-us/thunderbird/tag/rss
+#   - local proxy (as done previously) as a hook for detecting enclosures,
+#     and optionally downloading and passing on as a stream to the upstream app
+#     https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-stream-directly-to-media-player
+
 
 # stdlib
 import configparser
@@ -231,6 +249,10 @@ class ExtCmdPlugin (
 
 
     # TODO use `@override`?
+    # TODO Liferea sometimes not always updating some feeds even w/ new content
+    #   (eg. TVW The Impact)
+    # TODO feed fetch spacing option like RSS Guard? to avoid rate-limiting
+    #   https://github.com/lwindolf/liferea/issues/1555
     # inherit Liferea.DownloadActivatable
     def do_download(self, url: str) -> None:
         # TODO wasteful to re-read config on all downloads -- watch cfg changes?

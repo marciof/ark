@@ -1,6 +1,12 @@
 # Setup
 
-<!-- TODO test in a VM/lightweight container? CI? WSL orchestration? -->
+<!--
+TODO how to test in clean environments?
+   - in a VM/lightweight container?
+   - CI?
+   - WSL orchestration?
+   - https://github.com/89luca89/distrobox
+-->
 
 ## Plugin
 
