@@ -38,10 +38,11 @@ Rationale
 
 
 # TODO error handling
-# TODO tests (+ mypy + ycodestyle)
+# TODO tests (+ mypy + pycodestyle)
 # TODO document (+ dependencies + setup)
 
 # TODO could setup be simpler w/ a `./ext_cmd.d/*` style folder?
+#   - for Windows it could be just dropping a `.lnk` shortcut file
 # TODO could setup be simpler w/ sandboxing an old fixed version?
 
 # TODO helper script to get an RSS feed URL from a YouTube channel/playlist?

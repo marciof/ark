@@ -3,7 +3,7 @@
 <!--
 TODO how to test in clean environments?
    - in a VM/lightweight container?
-   - CI?
+   - CI? GitHub actions
    - WSL orchestration?
    - https://github.com/89luca89/distrobox
 -->
