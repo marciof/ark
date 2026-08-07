@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # List updates by checking PIP against files containing requirements.
-# If no arguments are given, it searches recursively ignoring hidden paths.
+# Without arguments it searches recursively ignoring hidden folders.
 #
 # A file containing requirements is one of the following:
 #
@@ -13,11 +13,18 @@
 #
 # Arguments: [file with requirements | directory ...]
 
-# FIXME convert to Python so it's cross-platform
-# FIXME list `pip` itself if outdated
-# FIXME ensure `pip install` uses `--uploaded-prior-to` (since pip v26.1)
-# FIXME ensure `pip install` uses `--require-virtualenv`
-# FIXME detect brand new/empty venv to list all are required updates
+# TODO convert to Python so it's cross-platform
+
+# TODO error handling
+# TODO tests (+ mypy + pycodestyle)
+# TODO document (+ dependencies + setup)
+# TODO logging (+ syslog)
+
+# TODO detect `pip` versions older than v26.0
+# TODO list `pip` itself if outdated
+# TODO ensure `pip install` uses `--uploaded-prior-to` (since pip v26.1)
+# TODO ensure `pip install` uses `--require-virtualenv`
+# TODO detect brand new/empty venv to list all are required updates
 
 set -o errexit -o nounset
 

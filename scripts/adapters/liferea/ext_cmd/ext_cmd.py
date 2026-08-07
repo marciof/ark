@@ -233,6 +233,7 @@ class ExtCmdPlugin (
     # TODO use `@override`?
     # inherit Liferea.DownloadActivatable
     def do_download(self, url: str) -> None:
+        # TODO wasteful to re-read config on all downloads -- watch cfg changes?
         (env_var, command) = self.get_on_download_url_config()
 
         if command is not None:
