@@ -2,10 +2,12 @@
 
 <!--
 TODO how to test in clean environments?
-   - in a VM/lightweight container?
-   - CI? GitHub actions
-   - WSL orchestration?
+   - check CI (GitHub actions?)
    - https://github.com/89luca89/distrobox
+   - https://libvirt.org
+   - https://www.vagrantup.com (and VCS config)
+   - https://fedoramagazine.org/automation-through-accessibility/
+   - https://github.com/asweigart/pyautogui
 -->
 
 ## Plugin

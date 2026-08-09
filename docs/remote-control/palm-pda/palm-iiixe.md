@@ -52,7 +52,7 @@ _(Unverified.)_
 
 ### Windows
 
-1. [Install drivers for the serial cable](https://www.eaton.com/us/en-us/skuPage.USA-19HS-C.html#tab-2) [^serial-drivers]\:
+1. [Install drivers for the serial to USB-C cable](https://www.eaton.com/us/en-us/skuPage.USA-19HS-C.html#tab-2) [^serial-drivers]\:
    - Windows 10 (32-bit): `eaton-tripp-lite-series-USA-19HS-driver-windows-7-8-server-2008-r2-v4.zip` [^serial-drivers-win10-32-cksum]
    - Windows 11: `eaton-tripp-lite-series-USA-19HS-driver-win11-win10.zip` [^serial-drivers-win11-cksum]
 2. Connect serial cable, verify it shows in `devmgmt.msc` under `Ports (COM & LPT)`, and **take note of the COM port number**.

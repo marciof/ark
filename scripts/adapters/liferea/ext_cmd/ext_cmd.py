@@ -41,9 +41,11 @@ Rationale
 # TODO tests (+ mypy + pycodestyle)
 # TODO document (+ dependencies + setup)
 
+# TODO rename env var to "download enclosure"
+# TODO could setup be simpler w/ sandboxing an old fixed version?
 # TODO could setup be simpler w/ a `./ext_cmd.d/*` style folder?
 #   - for Windows it could be just dropping a `.lnk` shortcut file
-# TODO could setup be simpler w/ sandboxing an old fixed version?
+#   - `.gitignore` within `./download-enclosure/*`?
 
 # TODO helper script to get an RSS feed URL from a YouTube channel/playlist?
 #   - https://codemadness.org/sfeed.html
@@ -250,6 +252,7 @@ class ExtCmdPlugin (
 
 
     # TODO use `@override`?
+    # TODO how to handle importing a large feedlist.opml with encAutoDownload?
     # TODO Liferea sometimes not always updating some feeds even w/ new content
     #   (eg. TVW The Impact)
     # TODO feed fetch spacing option like RSS Guard? to avoid rate-limiting
