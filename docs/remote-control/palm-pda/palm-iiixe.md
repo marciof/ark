@@ -64,6 +64,8 @@ _(Unverified.)_
 > [!Important]
 > `HotSync` seems to have issues with power management (eg. computer standby and wakeup). If sync fails, then disconnect and re-connect the Palm to the serial cable.
 
+<!-- TODO investigate sync failing after standby -->
+
 > [!Note]
 > [`Note Pad` (available starting in Palm OS 4)](https://palmdb.net/app/og-note-pad) support was dropped [_after_ Palm Desktop 4.1.0](https://web.archive.org/web/20081218230338/http://www.palm.com/us/support/downloads/add_downloads.html).
 

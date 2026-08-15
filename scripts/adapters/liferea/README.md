@@ -1,13 +1,15 @@
 # Setup
 
-<!--
-TODO how to test in clean environments?
-   - check CI (GitHub actions?)
-   - https://github.com/89luca89/distrobox
-   - https://libvirt.org
-   - https://www.vagrantup.com (and VCS config)
-   - https://fedoramagazine.org/automation-through-accessibility/
-   - https://github.com/asweigart/pyautogui
+<!-- TODO how to test in clean environments?
+
+- check CI? GitHub actions, Travis
+- https://github.com/89luca89/distrobox
+- https://www.vagrantup.com
+
+- https://libvirt.org
+
+- https://github.com/asweigart/pyautogui
+- https://fedoramagazine.org/automation-through-accessibility/
 -->
 
 ## Plugin
@@ -75,6 +77,8 @@ Set the environment variable specified in the [`*.plugin` file](./ext_cmd/ext_cm
 [^xdg-config]: > _"There is a single base directory relative to which user-specific configuration files should be written [...] defined by the environment variable $XDG_CONFIG_HOME."_
 
 ### Windows
+
+<!-- TODO fix WSLg + fast boot making Liferea's window disappear -->
 
 Liferea isn't available natively for Windows, so [install WSL first](https://learn.microsoft.com/windows/wsl/tutorials/gui-apps) to then install and run it from within.
 
