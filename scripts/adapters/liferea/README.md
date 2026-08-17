@@ -3,10 +3,18 @@
 <!-- TODO how to test in clean environments?
 
 - check CI? GitHub actions, Travis
+
 - https://github.com/89luca89/distrobox
 - https://www.vagrantup.com
 
 - https://libvirt.org
+- https://distrobox.it/posts/run_libvirt_in_distrobox/
+
+- https://linuxcontainers.org
+- https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html
+- https://katacontainers.io
+- https://github.com/firecracker-microvm/firecracker
+- https://github.com/lima-vm/lima
 
 - https://github.com/asweigart/pyautogui
 - https://fedoramagazine.org/automation-through-accessibility/
@@ -40,7 +48,7 @@ Ensure the plugins folder exists:
 Symlink the provided plugin into it:
 
 ```shell
-ln -v -s "`realpath -e ext_cmd`" "`./path_to.py plugins`"
+ln -v -s "`realpath -e ./ext_cmd`" "`./path_to.py plugins`"
 ```
 
 ## Liferea
