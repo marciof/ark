@@ -9,15 +9,6 @@
 # TODO test (+ shellcheck)
 # TODO document (+ dependencies + setup)
 
-# TODO add option for download location?
-# TODO add option to read `stdin` with URLs per line?
-
-# TODO embed video subtitles
-# TODO embed video metadata
-# TODO skip YouTube shorts (vertical videos)
-# TODO skip video if mtime > 1 year (eg. Last Week Tonight uploads old episodes)
-# TODO make it possible to starts watching a video before completing download?
-
 # TODO do filenames with emojis break Dropbox syncing?
 #   - https://github.com/woodgern/confusables
 #   - is Syncthing better? faster in a local network between devices?
@@ -35,10 +26,6 @@
 #   - https://github.com/Tyrrrz/YoutubeExplode
 #   - https://github.com/LuanRT/YouTube.js
 #   - https://github.com/imputnet/cobalt
-
-# TODO idea, accept `*.url` files
-#   - https://learn.microsoft.com/en-us/windows/win32/lwef/internet-shortcuts
-#   - https://nsis.sourceforge.io/Creating_internet_shortcuts
 
 # TODO download videos from Instagram feed
 #   Create RSS feed from IG feed?
@@ -96,6 +83,7 @@ in_wsl() {
 }
 
 run_youwee() {
+    # TODO maybe check if `youwee[.exe]` is in $PATH first?
     if in_wsl; then
         run_youwee_via_wsl "$@"
     else
@@ -133,7 +121,17 @@ download_via_yt_dlp() {
         yt_defaults --paths ~/Videos/ "$1"
 }
 
+# TODO option for download location?
+# TODO option to read `stdin` with URLs per line?
 # TODO option for rolling downloads? eg. only the last `n` NRK news episodes
+# TODO embed video subtitles
+# TODO embed video metadata
+# TODO skip YouTube shorts (vertical videos)
+# TODO skip video if mtime > 1 year (eg. Last Week Tonight uploads old episodes)
+# TODO make it possible to start watching a video before completing download?
+# TODO idea, accept `*.url` files
+#   - https://learn.microsoft.com/en-us/windows/win32/lwef/internet-shortcuts
+#   - https://nsis.sourceforge.io/Creating_internet_shortcuts
 for url; do
     # TODO not currently working from within WSL
     # TODO notify only in case of errors to reduce distractions?
@@ -143,6 +141,7 @@ for url; do
 
     # TODO ensure apps are always spawn in the background?
     # TODO call other alternatives if the default fails?
+    # TODO option to choose preferred tool w/o having to modify this script?
 #    download_via_youwee_cli "$url" 720
 #    download_via_media_downloader "$url"
     download_via_yt_dlp "$url"
