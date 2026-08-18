@@ -24,7 +24,8 @@ yt() {
 }
 
 yt_defaults() {
-    # https://github.com/yt-dlp/yt-dlp#filtering-formats
+    # TODO remove `player_client` workaround later
+    #   see: https://github.com/yt-dlp/yt-dlp/issues/17456
     yt \
         --mtime \
         --no-part \
@@ -32,6 +33,7 @@ yt_defaults() {
         --embed-subs \
         --embed-metadata \
         --embed-thumbnail \
+        --extractor-args 'youtube:player_client=web_embedded' \
         --format 'bestvideo[height<=?720]+bestaudio/best' \
         "$@"
 }
