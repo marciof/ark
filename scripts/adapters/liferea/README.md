@@ -18,6 +18,58 @@
 
 - https://github.com/asweigart/pyautogui
 - https://fedoramagazine.org/automation-through-accessibility/
+  - https://gitlab.com/dogtail/dogtail
+  - https://github.com/behave/behave
+-->
+
+<!-- TODO how to speed up Distrobox image creation?
+
+```
+$ distrobox enter ubuntu-26-04
+Starting container...                            [ OK ]
+Installing basic packages...
+```
+-->
+
+<!-- TODO how to handle password requirement?
+
+```
+$ distrobox enter ubuntu-26-04
+⚠️  First time user password setup ⚠️ 
+New password: 
+Retype new password: 
+You must choose a longer password.
+```
+-->
+
+<!-- TODO codify as shell script/unit/functional tests?
+
+```
+### box
+
+# use distrobox ephemeral?
+$ distrobox create --unshare-all --init --image ubuntu:26.04  --home "`realpath ./bx`"
+$ env -i distrobox enter ubuntu-26-04
+
+### liferea
+
+# https://github.com/lwindolf/liferea/issues/1584
+$ sudo apt install python3-requests
+
+### plugin
+
+$ sudo apt install python3-venv
+$ python3 -m venv ~/venv
+$ . ~/venv/bin/activate
+$ pip install 'pip>=26'
+
+$ ln -s /home/.../ark/ ~/
+$ cd ~/ark/scripts/adapters/liferea/
+$ pip install --requirements-from-script path_to.py
+
+# this needs to be also handled from the plugin side as well
+$ apt install gir1.2-peas-2
+```
 -->
 
 ## Plugin

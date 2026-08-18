@@ -86,7 +86,8 @@ logging.basicConfig()
 
 
 # TODO bring back the `Gio` alternative to avoid depending on dev pkgs?
-# TODO document missing dev pkgs: `apt install gir1.2-peas-2`
+# TODO document/handle missing dev pkgs: `apt install gir1.2-peas-2`
+#   see: https://github.com/lwindolf/liferea/blob/v1.16.7/plugins/trayicon.py
 class LifereaPlugins:
 
     """
