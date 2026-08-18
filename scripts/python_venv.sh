@@ -1,19 +1,15 @@
 #!/bin/sh
 
-# Wrapper around the local venv's Python.
+# Runs a command within the local venv.
 #
 # Arguments: [pass-through]
 
-# TODO make Python files shebang point to venv instead?
-
 set -o errexit -o nounset
 
-BASE_PATH="$(dirname "$(realpath -e "$0")")/../"
-export PYTHONPATH="${PYTHONPATH:-}:$BASE_PATH"
-
-PYTHON3="${PYTHON3:-python3}"
-VENV="$BASE_PATH/.venv/bin/activate"
+SCRIPTS_PATH="$(dirname "$(realpath -e "$0")")/"
+VENV_PATH="$SCRIPTS_PATH/../.venv/"
 
 # shellcheck disable=SC1090
-. "$VENV"
-"$PYTHON3" "$@"
+. "$VENV_PATH/bin/activate"
+
+"$@"
