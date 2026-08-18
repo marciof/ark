@@ -2,6 +2,8 @@
 
 # `yt-dlp` helper wrappers.
 # https://github.com/yt-dlp/yt-dlp
+#
+# Arguments: [command to run [arguments...]]
 
 # /// script
 # dependencies = [
@@ -62,3 +64,7 @@ yt_is_livestream() {
         "$1" \
     | grep --quiet --invert-match --ignore-case --fixed-strings not_live
 }
+
+if [ $# -gt 0 ]; then
+    "$@"
+fi

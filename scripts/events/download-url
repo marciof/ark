@@ -9,6 +9,9 @@
 # TODO test (+ shellcheck)
 # TODO document (+ dependencies + setup)
 
+# TODO add option for download location?
+# TODO add option to read `stdin` with URLs per line?
+
 # TODO embed video subtitles
 # TODO embed video metadata
 # TODO skip YouTube shorts (vertical videos)
@@ -56,6 +59,8 @@
 #   - https://greasyfork.org/en/scripts/561325-bypass-instagram-login-redirects/code
 
 set -o errexit -o nounset
+
+SCRIPTS_PATH="$(dirname "$(realpath -e "$0")")/../"
 
 # TODO re-add fallback to `youwee://` protocol?
 # TODO re-add fallback to `shell:AppsFolder`?
@@ -122,6 +127,12 @@ download_via_media_downloader() {
         --auto-download --url "$1"
 }
 
+download_via_yt_dlp() {
+    # TODO remove hardcoded download location
+    "$SCRIPTS_PATH/python_venv.sh" "$SCRIPTS_PATH/yt_dlp.sh" \
+        yt_defaults --paths ~/Videos/ "$1"
+}
+
 # TODO option for rolling downloads? eg. only the last `n` NRK news episodes
 for url; do
     # TODO not currently working from within WSL
@@ -131,9 +142,8 @@ for url; do
     fi
 
     # TODO ensure apps are always spawn in the background?
-    download_via_youwee_cli "$url" 720
-
     # TODO call other alternatives if the default fails?
-    #   download_via_media_downloader "$url"
-    #   . yt_dlp.sh && yt_defaults "$url"
+#    download_via_youwee_cli "$url" 720
+#    download_via_media_downloader "$url"
+    download_via_yt_dlp "$url"
 done
