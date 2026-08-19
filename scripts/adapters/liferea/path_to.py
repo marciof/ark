@@ -46,7 +46,7 @@ def get_plugins_path(app_name: str) -> Path:
 
 
 # TODO request Liferea cmdline flag to print paths?
-#      or via `gsettings list-recursively org.gnome.feed.Reader`?
+#      or via `gsettings list-recursively net.sf.liferea`?
 # TODO option for OPML backup? or automatic via a plugin?
 def main(args: Optional[List[str]] = None) -> NoReturn:
     arg_parser = argparse.ArgumentParser(description=__doc__.strip())

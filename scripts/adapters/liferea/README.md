@@ -69,6 +69,10 @@ $ pip install --requirements-from-script path_to.py
 
 # this needs to be also handled from the plugin side as well
 $ apt install gir1.2-peas-2
+
+# setup plugin symlink
+# venv `deactivate` before running liferea
+$ (deactivate && liferea)
 ```
 -->
 

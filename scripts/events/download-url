@@ -121,6 +121,7 @@ download_via_yt_dlp() {
         yt_defaults --paths ~/Videos/ "$1"
 }
 
+# TODO option to pause/queue downloads?
 # TODO option for download location?
 # TODO option to read `stdin` with URLs per line?
 # TODO option for rolling downloads? eg. only the last `n` NRK news episodes
