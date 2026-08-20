@@ -95,6 +95,8 @@ run_youwee() {
 # https://youwee.app/docs/cli/
 #
 # Arguments: <URL> <quality>
+# TODO allow yt-dlp's `--extractor-args 'youtube:player_client=web_embedded'
+#   https://github.com/yt-dlp/yt-dlp/issues/17456
 # TODO how to sort download queue from recent to old?
 # TODO app is sluggish as AppImage only? vs via .deb install
 # TODO disable previews altogether in the YouTube section
