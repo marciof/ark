@@ -143,7 +143,7 @@ for url; do
     # TODO ensure apps are always spawn in the background?
     # TODO call other alternatives if the default fails?
     # TODO option to choose preferred tool w/o having to modify this script?
-#    download_via_youwee_cli "$url" 720
+    download_via_youwee_cli "$url" 720
 #    download_via_media_downloader "$url"
-    download_via_yt_dlp "$url"
+#    download_via_yt_dlp "$url"
 done

@@ -42,7 +42,7 @@ Rationale
 # TODO document (+ dependencies + setup)
 
 # TODO rename env var to "download enclosure"
-# TODO could setup be simpler w/ sandboxing an old fixed version?
+#   - generalize env var to have `subprocess.Popen` accept shell code?
 # TODO could setup be simpler w/ a `./ext_cmd.d/*` style folder?
 #   - for Windows it could be just dropping a `.lnk` shortcut file
 #   - `.gitignore` within `./download-enclosure/*`?

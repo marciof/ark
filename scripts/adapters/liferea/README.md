@@ -66,6 +66,7 @@ $ tar xvf liferea-2.0.tar.xz
 $ sudo apt install python3-gi python3-requests
 # TODO gnome secret?
 $ sudo apt install gir1.2-secret-1
+# https://github.com/lwindolf/liferea/discussions/1585
 $ GSK_RENDERER=cairo WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 liferea --debug-all
 
 ### plugin
