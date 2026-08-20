@@ -47,14 +47,26 @@ You must choose a longer password.
 ```
 ### box
 
-# use distrobox ephemeral?
+# TODO use distrobox ephemeral?
+# TODO create new base package with pre-installed dependencies?
 $ distrobox create --unshare-all --init --image ubuntu:26.04  --home "`realpath ./bx`"
 $ env -i distrobox enter ubuntu-26-04
 
-### liferea
+### liferea v1.x (installation)
 
 # https://github.com/lwindolf/liferea/issues/1584
 $ sudo apt install python3-requests
+
+### liferea v2.x (building)
+
+$ wget 'https://github.com/lwindolf/liferea/releases/download/v2.0/liferea-2.0.tar.xz'
+$ tar xvf liferea-2.0.tar.xz
+# https://github.com/lwindolf/liferea/blob/main/.github/workflows/cb.yml
+# TODO missing from docs?
+$ sudo apt install python3-gi python3-requests
+# TODO gnome secret?
+$ sudo apt install gir1.2-secret-1
+$ GSK_RENDERER=cairo WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 liferea --debug-all
 
 ### plugin
 
@@ -67,7 +79,7 @@ $ ln -s /home/.../ark/ ~/
 $ cd ~/ark/scripts/adapters/liferea/
 $ pip install --requirements-from-script path_to.py
 
-# this needs to be also handled from the plugin side as well
+# TODO this needs to be also handled from the plugin side as well
 $ apt install gir1.2-peas-2
 
 # setup plugin symlink
