@@ -64,6 +64,7 @@ Rationale
 
 
 # stdlib
+from abc import ABC, abstractmethod
 import configparser
 from functools import partial
 import logging
@@ -71,12 +72,10 @@ import os
 from pathlib import Path
 import subprocess
 from threading import Thread
-from typing import Callable, Generator, Optional, TextIO
+from typing import Callable, Generator, Optional, TextIO, override
 
 # internal
-import gi
-gi.require_version('Peas', '2')
-from gi.repository import Gio, GObject, Liferea, Peas
+from gi.repository import Gio, GObject, Liferea
 
 
 # TODO not logging to syslog from within WSL
@@ -85,11 +84,23 @@ from gi.repository import Gio, GObject, Liferea, Peas
 logging.basicConfig()
 
 
-# TODO bring back the `Gio` alternative to avoid depending on dev pkgs?
-#   see: 6b5cd447~:scripts/adapters/liferea/ext_cmd/ext_cmd.py
+class LifereaPlugins (ABC):
+
+    def __init__(self, logger: logging.Logger):
+        self.logger = logger
+
+    @abstractmethod
+    def list_active(self) -> set[str]:
+        raise NotImplementedError()
+
+    @abstractmethod
+    def disable(self, name: str) -> None:
+        raise NotImplementedError()
+
+
 # TODO document/handle missing dev pkgs: `apt install gir1.2-peas-2`
 #   see: https://github.com/lwindolf/liferea/blob/v1.16.7/plugins/trayicon.py
-class LifereaPlugins:
+class LifereaPluginsViaLibPeas (LifereaPlugins):
 
     """
     References:
@@ -97,24 +108,82 @@ class LifereaPlugins:
     - https://gnome.pages.gitlab.gnome.org/libpeas/libpeas-2/
     """
 
+    @override
     def __init__(self, logger: logging.Logger):
-        self.logger = logger
+        super().__init__(logger)
+
+        import gi
+        gi.require_version('Peas', '2')
+        from gi.repository import Peas
+
         self.engine = Peas.Engine.get_default()
 
 
+    @override
     def list_active(self) -> set[str]:
         # TODO does plugin order matter?
         return set(self.engine.dup_loaded_plugins())
 
 
+    @override
     def disable(self, name: str) -> None:
         self.logger.info('Disabling plugin: %s', name)
-        plugin = self.engine.get_plugin_info('download-manager')
+        plugin = self.engine.get_plugin_info(name)
 
         if plugin is None:
             self.logger.error('Plugin not found: %s', name)
         else:
             self.engine.unload_plugin(plugin)
+
+
+class LifereaPluginsViaGnomeIO (LifereaPlugins):
+
+    """
+    References:
+
+    - https://api.pygobject.gnome.org/Gio-2.0/structure-SettingsSchemaSource.html
+    - https://api.pygobject.gnome.org/Gio-2.0/class-Settings.html#gi.repository.Gio.Settings
+    """
+
+    @override
+    def __init__(self, logger: logging.Logger):
+        super().__init__(logger)
+        schema_id = 'net.sf.liferea.plugins'
+
+        self.logger.debug('Get default system schema source.')
+        schema_source = Gio.SettingsSchemaSource.get_default()
+
+        self.logger.debug('Lookup schema ID: %s', schema_id)
+        self.schema = schema_source.lookup(schema_id, recursive=False)
+        self.logger.info(
+            'Plugins schema ID "%s" found: %s',
+            schema_id,
+            self.schema.get_path())
+
+        self.settings = Gio.Settings.new(schema_id)
+
+
+    @override
+    def list_active(self) -> set[str]:
+        key_name = 'active-plugins'
+
+        if not self.schema.has_key(key_name):
+            # FIXME exception if active plugins aren't found?
+            self.logger.error(
+                'Active plugins schema key not found: %s', key_name)
+            return set()
+        else:
+            # FIXME plugin order is lost -- does it matter?
+            return set(self.settings.get_strv(key_name))
+
+
+    @override
+    def disable(self, name: str) -> None:
+        self.logger.info('Disabling plugin: %s', name)
+
+        # FIXME possible race condition -- does it matter?
+        plugins = list(self.list_active() - {name})
+        self.settings.set_strv('active-plugins', plugins)
 
 
 # TODO refactor out config handling?
@@ -170,7 +239,8 @@ class ExtCmdPlugin (
             'Config: disable download manager plugin? %s',
             '='.join(map(str, self.get_download_manager_config())))
 
-        self.plugins = LifereaPlugins(self.logger)
+        # TODO use whatever implementation works (with libPeas first)
+        self.plugins = LifereaPluginsViaGnomeIO(self.logger)
         self.logger.debug('Active plugins: %s', self.plugins.list_active())
 
         app: Optional[Gio.Application] = Gio.Application.get_default()
