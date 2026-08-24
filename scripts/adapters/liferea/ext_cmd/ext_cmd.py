@@ -156,7 +156,7 @@ class ExtCmdPlugin (
 
         self.logger: logging.Logger = logging.getLogger('plugin.' + plugin_name)
         self.logger.setLevel(logging.DEBUG)
-        self.logger.debug('__init__: %s', plugin_path)
+        self.logger.debug('__init__(id=%s): %s', id(self), plugin_path)
 
         self.plugin_info_path = plugin_path.parent / (plugin_name + '.plugin')
         self.config_parser = configparser.ConfigParser()
